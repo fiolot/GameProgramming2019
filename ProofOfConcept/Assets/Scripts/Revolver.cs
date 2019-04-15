@@ -1,22 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Revolver : MonoBehaviour
 {
     public GameObject projectile;
     public GameObject ammoCylinder;
     public Renderer[] ammo = new Renderer[6];
-    [SerializeField]private bool[] chambers = new bool[6];
-    [SerializeField]int index = 0;
+    private bool[] chambers = new bool[6];
+    int index = 0;
     bool canFire;
-
+    public Text bulletsText;
+    int bullets, maxBullets = 2;
     private void Start()
     {
         StartCoroutine("Reload");
     }
     private void Update()
     {
+        bulletsText.text = "Bullets: " + bullets + "/" + maxBullets;
         index = index >= chambers.Length ? 0 : index;
         if (canFire)
         {
@@ -37,7 +39,7 @@ public class Revolver : MonoBehaviour
         if (chambers[index])
         {
             Fire();
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.1f);
             if (EmptyChambers())
             {
                 StartCoroutine("Reload");
@@ -50,7 +52,7 @@ public class Revolver : MonoBehaviour
         else
         {
             Debug.Log("Blank!");
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(0.4f);
             canFire = true;
         }
         SkipChamber();
@@ -62,6 +64,7 @@ public class Revolver : MonoBehaviour
         chambers[index] = false;
         ammo[index].enabled = false;
         Instantiate(projectile, transform.position, transform.rotation).GetComponent<Projectile>().damage = 5;
+        bullets--;
     }
     bool EmptyChambers()
     {
@@ -87,12 +90,12 @@ public class Revolver : MonoBehaviour
             secondRandom = Random.Range(0, 6);
         } while (secondRandom == firstRandom);
         chambers[secondRandom] = true;
-        ammoCylinder.transform.localPosition = new Vector3(-1, ammoCylinder.transform.localPosition.y, ammoCylinder.transform.localPosition.z);
+        ammoCylinder.transform.localPosition = new Vector3(-1.2f, ammoCylinder.transform.localPosition.y, ammoCylinder.transform.localPosition.z);
         ammo[firstRandom].enabled = true;
         ammo[secondRandom].enabled = true;
         yield return new WaitForSeconds(0.2f);
         ammoCylinder.transform.localPosition = new Vector3(0, ammoCylinder.transform.localPosition.y, ammoCylinder.transform.localPosition.z);
-
+        bullets = 2;
         canFire = true;
         yield break;
     }

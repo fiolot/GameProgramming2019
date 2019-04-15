@@ -5,7 +5,7 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     internal int health;
-    readonly int maxHealth = 5;
+    internal readonly int maxHealth = 5;
     bool ded;
     public Character(int healthMax=5)
     {
@@ -23,7 +23,7 @@ public class Character : MonoBehaviour
         Debug.Log("Health: " + health);
 
     }
-    internal void Die()
+    internal virtual void Die()
     {
         Debug.Log("You dead son!");
         if(!ded)
