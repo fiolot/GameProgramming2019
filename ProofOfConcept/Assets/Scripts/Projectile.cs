@@ -5,24 +5,27 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Projectile : MonoBehaviour
 {
-    public int damage = 1, speed = 5;
+    public int damage = 1, speed = 5, speedMult = 1000;
     public float secondsToDie = 1.0f;
     private void Start()
     {
-        GetComponent<Rigidbody>().AddRelativeForce(Vector3.up * speed * 1000);
+        GetComponent<Rigidbody>().AddRelativeForce(Vector3.up * speed * speedMult);
         Destroy(gameObject, secondsToDie);
 
     }
     private void OnTriggerEnter(Collider other)
     {
-        try
+        if (other.gameObject.tag != "Trigger")
         {
-            other.gameObject.GetComponent<Character>().TakeDamage(damage);
-        }
-        catch
-        {
+            try
+            {
+                other.gameObject.GetComponent<Character>().TakeDamage(damage);
+            }
+            catch
+            {
 
+            }
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
     }
 }
