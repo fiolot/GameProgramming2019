@@ -14,9 +14,16 @@ public class Player : Character
     {
         playerBody = GetComponent<Rigidbody>();
         sqrMaxVelocity = (Vector3.forward * moveSpeed).sqrMagnitude;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
     private void FixedUpdate()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
         if (Input.GetKey(KeyCode.W) && !noInput)
         {
             playerBody.AddRelativeForce(Vector3.forward * moveSpeed);
