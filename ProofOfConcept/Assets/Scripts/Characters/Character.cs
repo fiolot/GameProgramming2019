@@ -20,13 +20,11 @@ public class Character : MonoBehaviour
             health = 0;
             Die();
         }
-        Debug.Log("Health: " + health);
 
     }
     internal virtual void Die()
     {
-        Debug.Log("You dead son!");
-        if(!ded)
-            Destroy(gameObject, 0.5f);
+        GameManager.gameManager.enemies.Remove(gameObject);
+        Destroy(gameObject, 0.5f);
     }
 }

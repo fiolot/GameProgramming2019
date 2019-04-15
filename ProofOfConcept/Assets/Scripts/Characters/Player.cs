@@ -32,6 +32,7 @@ public class Player : Character
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
+            Application.Quit();
         }
         if (Input.GetKey(KeyCode.W) && !noInput)
         {
