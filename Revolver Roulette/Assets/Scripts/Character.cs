@@ -1,18 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[RequireComponent(typeof(Collider))]
-public abstract class Character : MonoBehaviour
+namespace RevolverRoulette
 {
-    [HideInInspector]public readonly int maxHealth;
-    [HideInInspector]public int health;
-    public Character(int maxHealth = 5)
+    [RequireComponent(typeof(Collider))]
+    public abstract class Character : MonoBehaviour
     {
-        maxHealth = this.maxHealth;
-        health = maxHealth;
-    }
-    public void TakeDamage(int damage)
-    {
+        [HideInInspector] public readonly int maxHealth;
+        [HideInInspector] public int health;
+        internal Character(int maxHealth = 5)
+        {
+            maxHealth = this.maxHealth;
+            health = maxHealth;
+        }
+        public void TakeDamage(int damage)
+        {
 
+        }
     }
 }

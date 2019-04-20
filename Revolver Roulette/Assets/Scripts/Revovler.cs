@@ -2,27 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Revovler : MonoBehaviour
+namespace RevolverRoulette
 {
-    int index = 0;
-    bool CheckChamber()
+    public class Revolver : MonoBehaviour
     {
-        if (true)
+        public Renderer[] chambers = new Renderer[6];
+        bool canFire = true;
+        public int index = 0;
+        public bool CheckChamber()
+        {
+            return false;
+        }
+        public void Fire()
         {
 
         }
-        return false;
-    }
-    void Fire()
-    {
+        public void SkipChamber()
+        {
 
-    }
-    void SkipChamber()
-    {
+        }
+        public void Reload()
+        {
 
-    }
-    void Reload()
-    {
-
+        }
     }
 }

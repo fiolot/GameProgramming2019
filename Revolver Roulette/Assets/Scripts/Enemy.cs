@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Enemy : Character
+namespace RevolverRoulette
 {
-    public Enemy(int maxHealth = 5) : base(maxHealth)
+    public class Enemy : Character
     {
-        
+        public Enemy(int maxHealth = 5) : base(maxHealth)
+        {
+
+        }
     }
 }
