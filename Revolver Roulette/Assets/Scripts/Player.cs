@@ -5,10 +5,14 @@ namespace RevolverRoulette
 {
     public class Player : Character
     {
-        [SerializeField] float movementSpeed = 1.0f;
         public Player(int maxHealth = 5) : base(maxHealth)
         {
 
+        }
+        private void Reset()
+        {
+            maxHealth = 5;
+            health = maxHealth;
         }
     }
 }
